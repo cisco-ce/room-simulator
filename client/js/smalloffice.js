@@ -22,8 +22,8 @@ function paintRoom(root) {
 
 
 export default class SmallOffice {
-  constructor() {
-    const snap = new Snap('#exampleroom');
+  constructor(element) {
+    const snap = new Snap(element);
     this.element = snap;
     snap.node.onclick = showClickCoords.bind(this);
   }
