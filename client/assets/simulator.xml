@@ -1,0 +1,141 @@
+﻿<Extensions>
+  <Version>1.5</Version>
+  <Panel>
+    <Name>Lights &amp; Blinds</Name>
+    <Icon>Lightbulb</Icon>
+    <Type>Home</Type>
+    <Page>
+      <Name>Lights &amp; Blinds</Name>
+      <Row>
+        <Name>Lights</Name>
+        <Widget>
+          <WidgetId>lights_slider</WidgetId>
+          <Type>Slider</Type>
+        </Widget>
+        <Widget>
+          <WidgetId>lights_toggle</WidgetId>
+          <Type>ToggleButton</Type>
+        </Widget>
+      </Row>
+      <Row>
+        <Name>Projector power</Name>
+        <Widget>
+          <WidgetId>projector_power</WidgetId>
+          <Type>ToggleButton</Type>
+        </Widget>
+      </Row>
+      <Row>
+        <Name>Projector canvas</Name>
+        <Widget>
+          <WidgetId>projector_canvas</WidgetId>
+          <Type>Spinner</Type>
+          <Options>size=2</Options>
+        </Widget>
+      </Row>
+      <Row>
+        <Name>Blinds Presets</Name>
+        <Widget>
+          <WidgetId>blinds_preset</WidgetId>
+          <Type>GroupButton</Type>
+          <ValueSpace>
+            <Value>
+              <Key>0</Key>
+              <Name>Open</Name>
+            </Value>
+            <Value>
+              <Key>50</Key>
+              <Name>50/50</Name>
+            </Value>
+            <Value>
+              <Key>100</Key>
+              <Name>Closed</Name>
+            </Value>
+          </ValueSpace>
+        </Widget>
+      </Row>
+      <Row>
+        <Name>Blinds Manual</Name>
+        <Widget>
+          <WidgetId>blinds</WidgetId>
+          <Type>Spinner</Type>
+          <Options>size=2</Options>
+        </Widget>
+      </Row>
+    </Page>
+  </Panel>
+  <Panel>
+    <Name>Climate</Name>
+    <Icon>Hvac</Icon>
+    <Type>Statusbar</Type>
+    <Page>
+      <Name>Temperature</Name>
+      <Row>
+        <Name>Power</Name>
+        <Widget>
+          <WidgetId>hvac_power</WidgetId>
+          <Type>Button</Type>
+          <Options>size=1;icon=power</Options>
+        </Widget>
+      </Row>
+      <Row>
+        <Name>Desired temperature (C)</Name>
+        <Widget>
+          <WidgetId>temperature_setpoint</WidgetId>
+          <Type>Spinner</Type>
+          <Options>size=2</Options>
+        </Widget>
+      </Row>
+      <Row>
+        <Name>Indoor temperature (C)</Name>
+        <Widget>
+          <WidgetId>temperature</WidgetId>
+          <Type>Text</Type>
+          <Name>?</Name>
+          <Options>size=1</Options>
+        </Widget>
+      </Row>
+      <Row>
+        <Name>Weather</Name>
+        <Widget>
+          <WidgetId>weather</WidgetId>
+          <Type>Text</Type>
+          <Name>?</Name>
+          <Options>size=4</Options>
+        </Widget>
+      </Row>
+    </Page>
+    <Page>
+      <Name>Demo</Name>
+      <Row>
+        <Name>Wakeup demo</Name>
+        <Widget>
+          <WidgetId>standby</WidgetId>
+          <Type>Button</Type>
+          <Name>Activate standby manually</Name>
+          <Options>size=3</Options>
+        </Widget>
+      </Row>
+      <Row>
+        <Name>Speaker track demo</Name>
+        <Widget>
+          <WidgetId>speakertrack_diagnostic_start</WidgetId>
+          <Type>Button</Type>
+          <Name>Start</Name>
+          <Options>size=2</Options>
+        </Widget>
+        <Widget>
+          <WidgetId>speakertrack_diagnostic_stop</WidgetId>
+          <Type>Button</Type>
+          <Name>Stop</Name>
+          <Options>size=2</Options>
+        </Widget>
+        <Widget>
+          <WidgetId>widget_10</WidgetId>
+          <Type>Text</Type>
+          <Name>Show how the speaker tracker is detecting people (requires SpeakerTrack cameras)</Name>
+          <Options>size=4</Options>
+        </Widget>
+      </Row>
+    </Page>
+  </Panel>
+</Extensions>
