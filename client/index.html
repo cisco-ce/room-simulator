@@ -4,12 +4,38 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RoomOS extension simulator</title>
+  <title>RoomOS simulator</title>
   <script src="bundle.js" defer></script>
   <link rel="stylesheet" href="simulator.css" />
 </head>
-<body x-data="{ test: 1234 }">
-  <header>UI Extensions simulator</header>
+<body x-data="window.gui" x-cloak>
+  <header>
+    <h1>UI Extensions Simulator</h1>
+    <button @click="showConnectDialog(true)">Connect</button>
+  </header>
   <div id="simulator"></div>
+  <div class="fade" x-show="showConnect">
+    <div class="dialog">
+      <form>
+        <div>Connect to video device</div>
+        <div>
+          <label>Host</label>
+          <input placeholder="10.47.1.2" x-model="device.host" />
+        </div>
+        <div>
+          <label>Username</label>
+          <input placeholder="admin" x-model="device.username" />
+        </div>
+        <div>
+          <label>Password</label>
+          <input type="password" placeholder="****" x-model="device.password" />
+        </div>
+        <div>
+          <button @click.prevent="connect()" :disabled="!connectValid()">Connect</button>
+          <button @click.prevent="showConnectDialog(false)">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>

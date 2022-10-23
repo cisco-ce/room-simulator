@@ -4,6 +4,13 @@ import SmallOffice from './smalloffice';
 import RoomAdapter from './roomadapter';
 import Codec from './codec';
 
+import gui from './gui';
+
+const codec = new Codec();
+
+// make the gui model available to index.html:
+window.gui = gui;
+
 Alpine.start();
 
 async function getSvg() {
@@ -16,7 +23,7 @@ async function init() {
   const container = document.getElementById('simulator');
   container.innerHTML = room;
   const officeView = new SmallOffice(container);
-  const adapter = new RoomAdapter(new Codec(), officeView);
+  const adapter = new RoomAdapter(codec, officeView);
   officeView.loadRoom();
   window.onEvent = (widgetId, event, value) => adapter.onEvent(widgetId, event, value);
 }

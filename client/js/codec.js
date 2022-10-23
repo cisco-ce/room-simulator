@@ -9,6 +9,6 @@ export default class Codec {
   }
 
   setWidgetStatus(widgetId, value) {
-    console.log('set widget', widgetId, value);
+    // console.log('set widget', widgetId, value);
   }
 };
