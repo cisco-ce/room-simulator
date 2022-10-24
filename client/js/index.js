@@ -1,6 +1,6 @@
 import Alpine from 'alpinejs';
 
-import SmallOffice from './smalloffice';
+import SmallOffice from './views/office';
 import RoomAdapter from './roomadapter';
 import Codec from './codec';
 
@@ -13,18 +13,13 @@ window.gui = gui;
 
 Alpine.start();
 
-async function getSvg() {
-  const svg = await fetch('./images/exampleroom.svg');
-  return svg.text();
-}
-
 async function init() {
-  const room = await getSvg();
-  const container = document.getElementById('simulator');
-  container.innerHTML = room;
-  const officeView = new SmallOffice(container);
+  const officeView = new SmallOffice();
   const adapter = new RoomAdapter(codec, officeView);
-  officeView.loadRoom();
+  const container = document.getElementById('simulator');
+  await officeView.loadRoom(container);
+
+  // todo for dev testing
   window.onEvent = (widgetId, event, value) => adapter.onEvent(widgetId, event, value);
 }
 

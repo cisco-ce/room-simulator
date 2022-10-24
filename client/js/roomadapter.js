@@ -3,7 +3,7 @@ import Curtain from './model/curtain';
 import Projector from './model/projector';
 import ClimateController from './model/climatecontroller';
 import SourceList from './model/sources';
-import Throttler from './throttler';
+import Throttler from './utils/throttler';
 
 const DefaultThrottling = 100;
 

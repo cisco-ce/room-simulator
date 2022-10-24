@@ -1,14 +1,14 @@
 import Snap from 'snapsvg-cjs'
 import $ from 'jquery';
 
-import Blinds from './views/blinds';
-import Monitor from './views/monitor';
-import Switch from './views/switch';
-import Projector from './views/projector';
-import Drone from './views/drone';
-import HVAC from './views/hvac';
-import Canvas from './views/canvas';
-import RoomLightAmbience from './views/ambience';
+import Blinds from './blinds';
+import Monitor from './monitor';
+import Switch from './switch';
+import Projector from './projector';
+import Drone from './drone';
+import HVAC from './hvac';
+import Canvas from './canvas';
+import RoomLightAmbience from './ambience';
 
 function showClickCoords(e) {
   // const x = e.offsetX * 1366 / $('.roomView').width();
@@ -20,12 +20,13 @@ function paintRoom(root) {
   root.select('#right_wall_1_ .st15').attr('style', 'fill: #F5F5F5');
 }
 
+async function getSvg() {
+  const svg = await fetch('./images/exampleroom.svg');
+  return svg.text();
+}
 
 export default class SmallOffice {
-  constructor(element) {
-    const snap = new Snap(element);
-    this.element = snap;
-    snap.node.onclick = showClickCoords.bind(this);
+  constructor() {
   }
 
   hideUnused() {
@@ -44,7 +45,14 @@ export default class SmallOffice {
     return this.element.node;
   }
 
-  loadRoom() {
+  async loadRoom(container) {
+    const snap = new Snap(container);
+    snap.node.onclick = showClickCoords.bind(this);
+    this.element = snap;
+
+    const svg = await getSvg();
+    container.innerHTML = svg;
+
     this.root = Snap('#outside').parent();
     const shade = document.getElementById('room-brightness_1_');
 
