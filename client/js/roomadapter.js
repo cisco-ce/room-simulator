@@ -1,3 +1,10 @@
+/**
+ * Adapter that ties together the internal models of the sim (light, shades, ...)
+ * with the (logical) UI extension events and commands:
+ * - Models register to the ui events they are interested in, and is notified
+ * - Models set ui extension states (widget values) whenever they change in the sim
+ * - Also, makes sure all calls over xapi are throttled.
+ */
 import Light from './model/light';
 import Curtain from './model/curtain';
 import Projector from './model/projector';
@@ -16,6 +23,7 @@ export default class RoomAdapter {
       this.sendThrottled.bind(this),
       DefaultThrottling,
     );
+    codec.setListener(this.onEvent.bind(this));
     this.setupLight();
     this.setupBlinds();
     this.setupProjector();
@@ -242,7 +250,14 @@ export default class RoomAdapter {
     return `${widgetId}:${event}`;
   }
 
-  onEvent(widgetId, event, value) {
+  onEvent(event) {
+    if (event.Extensions?.Widget?.Action) {
+      const { WidgetId, Type, Value } = event.Extensions.Widget.Action;
+      this.onWidgetEvent(WidgetId, Type, Value);
+    }
+  }
+
+  onWidgetEvent(widgetId, event, value) {
     const callback = this.eventCallbacks.get(this.key(widgetId, event));
     if (callback) {
       callback(value);

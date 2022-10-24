@@ -1,17 +1,12 @@
 # Simulator TODO
 
-- Dev life: auto rebuild when files are saved
-- Install alpine and jsxapi lib
-- Main layout: header with logo
 - Sim menu:
-  - connect to device
   - install ui extension
   - remove ui extension
 - Make new codec adapter with jsxapi
 - Add to github and github pages
 
 - Show api panel
-- Add wallpaper to video device monitors
 - Replace room system with board pro? (designer help)
 - Use requestanimationframe instad of setInterval. test in other browsers
 - Tweak ui extension panel. use emojis?
@@ -51,3 +46,18 @@ Designer
 - person behind door perhaps not move?
 
 - make table more narrow close to camera (like tower of hanoi)
+
+
+
+
+## What I needed to do
+
+- Understand how the whole thing worked
+- Add webpack configuration and dev setup for project
+- Hassle: Make snap work with webpack
+- Remove web pack dependencies on requiring assets
+- Refactor and improvements
+- Integrate with Alpine for reactive ui (instead of jquery)
+- Connect to video device dialog and logic
+
+

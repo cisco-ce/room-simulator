@@ -10,6 +10,7 @@ const codec = new Codec();
 
 // make the gui model available to index.html:
 window.gui = gui;
+gui.setCodec(codec);
 
 Alpine.start();
 

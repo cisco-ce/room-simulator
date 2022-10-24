@@ -5,13 +5,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RoomOS simulator</title>
+  <script src="https://unpkg.com/jsxapi@5.1.1/dist/jsxapi.js"></script>
   <script src="bundle.js" defer></script>
   <link rel="stylesheet" href="simulator.css" />
 </head>
 <body x-data="window.gui" x-cloak>
   <header>
     <h1>UI Extensions Simulator</h1>
-    <button @click="showConnectDialog(true)">Connect</button>
+    <button @click="showConnectDialog(true)" x-show="!connected">Connect</button>
+    <button @click="showConnectDialog(true)" x-show="connected">Connected</button>
   </header>
   <div id="simulator"></div>
   <div class="fade" x-show="showConnect">
