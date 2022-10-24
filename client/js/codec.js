@@ -41,6 +41,24 @@ export default class Codec {
     this.listener = listener;
   }
 
+  installUiExtension(PanelId, xml) {
+    if (!this.xapi) return;
+    return this.xapi.Command.UserInterface.Extensions.Panel.Save({ PanelId }, xml);
+  }
+
+  removeUiExtension(PanelId) {
+    if (!this.xapi) return;
+    return this.xapi.Command.UserInterface.Extensions.Panel.Remove({ PanelId });
+  }
+
+  async hasUiExtensions() {
+    const list = await this.xapi.Command.UserInterface.Extensions.List();
+    const panels = list.Extensions?.Panel || [];
+    const lights =  panels.find(p => p.PanelId === 'uisim_lights');
+    const climate =  panels.find(p => p.PanelId === 'uisim_climate');
+    return !!(lights && climate);
+  }
+
   unsetWidgetStatus(WidgetId) {
     if (!this.xapi) return;
     this.xapi.Command.UserInterface.Extensions.Widget.UnsetValue({ WidgetId });

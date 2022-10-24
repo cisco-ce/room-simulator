@@ -17,7 +17,7 @@
   </header>
   <div id="simulator"></div>
   <div class="fade" x-show="showConnect">
-    <div class="dialog">
+    <div class="dialog" x-show="!connected">
       <form>
         <div>Connect to video device</div>
         <div>
@@ -35,6 +35,24 @@
         <div>
           <button @click.prevent="connect()" :disabled="!connectValid()">Connect</button>
           <button @click.prevent="showConnectDialog(false)">Cancel</button>
+        </div>
+      </form>
+    </div>
+    <div class="dialog" x-show="connected">
+      <form>
+        <div>Connected to video device</div>
+        <div>Host: <label x-text="device.host"></label></div>
+        <div>
+          <button @click.prevent="installUiExtensions()">Install UI extensions</button>
+        </div>
+        <div>
+          <button
+            @click.prevent="removeUiExtensions()"
+            :disabled="!hasUiExtensions"
+          >Uninstall UI extensions</button>
+        </div>
+        <div>
+          <button @click.prevent="showConnectDialog(false)">Close</button>
         </div>
       </form>
     </div>

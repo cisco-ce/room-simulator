@@ -1,15 +1,11 @@
 # Simulator TODO
 
-- Sim menu:
-  - install ui extension
-  - remove ui extension
-- Make new codec adapter with jsxapi
 - Add to github and github pages
 
 - Show api panel
 - Replace room system with board pro? (designer help)
 - Use requestanimationframe instad of setInterval. test in other browsers
-- Tweak ui extension panel. use emojis?
+- Tweak ui extension panel. use emojis? add presets
 - Make virtual sources work
 - Toggle help (show clickable elements)
 

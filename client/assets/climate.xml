@@ -1,0 +1,50 @@
+<Extensions>
+  <Version>1.9</Version>
+  <Panel>
+    <Order>3</Order>
+    <PanelId>uisim_climate</PanelId>
+    <Location>HomeScreenAndCallControls</Location>
+    <Icon>Hvac</Icon>
+    <Color>#875AE0</Color>
+    <Name>Climate</Name>
+    <ActivityType>Custom</ActivityType>
+    <Page>
+      <Name>Temperature</Name>
+      <Row>
+        <Name>Power</Name>
+        <Widget>
+          <WidgetId>hvac_power</WidgetId>
+          <Type>Button</Type>
+          <Options>size=1;icon=power</Options>
+        </Widget>
+      </Row>
+      <Row>
+        <Name>Desired temperature (C)</Name>
+        <Widget>
+          <WidgetId>temperature_setpoint</WidgetId>
+          <Type>Spinner</Type>
+          <Options>size=2</Options>
+        </Widget>
+      </Row>
+      <Row>
+        <Name>Indoor temperature (C)</Name>
+        <Widget>
+          <WidgetId>temperature</WidgetId>
+          <Name>?</Name>
+          <Type>Text</Type>
+          <Options>size=1;fontSize=normal;align=center</Options>
+        </Widget>
+      </Row>
+      <Row>
+        <Name>Weather</Name>
+        <Widget>
+          <WidgetId>weather</WidgetId>
+          <Name>?</Name>
+          <Type>Text</Type>
+          <Options>size=4;fontSize=small;align=left</Options>
+        </Widget>
+      </Row>
+      <Options/>
+    </Page>
+  </Panel>
+</Extensions>
