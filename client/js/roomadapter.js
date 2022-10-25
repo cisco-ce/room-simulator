@@ -10,6 +10,7 @@ import Curtain from './model/curtain';
 import Projector from './model/projector';
 import ClimateController from './model/climatecontroller';
 import SourceList from './model/sources';
+import Outside from './model/outside';
 import Throttler from './utils/throttler';
 
 const DefaultThrottling = 100;
@@ -32,6 +33,7 @@ export default class RoomAdapter {
     this.setupDrone();
     this.setupReset();
     this.setupStandby();
+    this.setupOutside();
     this.setupSpeakerTrackDiagnostics();
   }
 
@@ -86,6 +88,17 @@ export default class RoomAdapter {
         });
       }
     }, 4000);
+  }
+
+  setupOutside() {
+    this.outside = new Outside();
+    this.view.setOutsideModel(this.outside);
+    this.outside.addListener(() => {
+      this.setWidgetStatus('outside_id', this.outside.getId())
+    });
+    this.addCodecListener('outside_id', 'released', (value) => {
+      this.outside.setOutside(value);
+    });
   }
 
   setupProjector() {
@@ -252,6 +265,7 @@ export default class RoomAdapter {
 
   onEvent(event) {
     if (event.Extensions?.Widget?.Action) {
+      // console.log(event);
       const { WidgetId, Type, Value } = event.Extensions.Widget.Action;
       this.onWidgetEvent(WidgetId, Type, Value);
     }

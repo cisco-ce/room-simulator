@@ -9,6 +9,7 @@ import Drone from './drone';
 import HVAC from './hvac';
 import Canvas from './canvas';
 import RoomLightAmbience from './ambience';
+import Outside from './outside';
 
 function showClickCoords(e) {
   // const x = e.offsetX * 1366 / $('.roomView').width();
@@ -135,20 +136,13 @@ export default class SmallOffice {
   }
 
   setupOutsideWorld(root) {
-    const data = {};
-    const url = './images/city.png';
-    // const url = '/images/beach.jpg';
-
-    const x1 = 30 + (data.x ? data.x : 0);
-    const y1 = 150 + (data.y ? data.y : 0);
-    const w = data.w ? data.w : 887;
-    const h = data.h ? data.h : 516;
     const maskFront = this.blindsFront.getOutsideMask();
     const maskBack = this.blindsBack.getOutsideMask();
-    const windows = root.group(maskFront, maskBack);
-    this.outside = root.image(url, x1, y1, w, h);
-    this.outside.attr({ mask: windows });
-    this.outside.insertAfter(root.select('#room-brightness_1_'));
+    const windows = this.root.group(maskFront, maskBack);
+    this.outside = new Outside(root, windows);
+    this.outsideModel.addListener(() => {
+      this.outside.select(this.outsideModel.getId());
+    });
   }
 
   setupRightWindow(root) {
@@ -380,6 +374,10 @@ export default class SmallOffice {
 
   setLightsModel(model) {
     this.lampModel = model;
+  }
+
+  setOutsideModel(model) {
+    this.outsideModel = model;
   }
 
   idefixClicked(e) {
