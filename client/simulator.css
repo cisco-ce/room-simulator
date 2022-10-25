@@ -101,3 +101,12 @@ form input {
   background: #eee;
 }
 
+.window {
+  fill: white;
+  opacity: 0;
+  transition: opacity 1s ease-in;
+}
+
+.flash {
+  opacity: 1;
+}

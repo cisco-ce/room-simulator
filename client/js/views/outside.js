@@ -35,8 +35,13 @@ export default class Outside {
 
   constructor(root, windowMask) {
     this.root = root;
-    this.windowMask = windowMask;
+    this.view = root.group();
+    this.view.attr({ mask: windowMask });
+    this.view.insertAfter(this.root.select('#room-brightness_1_'));
+
     this.select(data[0].id);
+
+    window.setOutside = this.select.bind(this);
   }
 
   select(id) {
@@ -50,11 +55,18 @@ export default class Outside {
     if (this.outside) {
       this.outside.remove();
     }
+    if (this.flash) {
+      this.flash.remove();
+    }
 
     const { url, rect } = item;
     const { x, y, w, h } = rect;
     this.outside = this.root.image(url, x, y, w, h);
-    this.outside.attr({ mask: this.windowMask });
-    this.outside.insertAfter(this.root.select('#room-brightness_1_'));
+    this.flash = this.root.rect(x, y, w, h);
+    this.flash.addClass('window');
+    this.flash.addClass('flash');
+    this.view.add(this.outside);
+    this.view.add(this.flash);
+    setTimeout(() => this.flash.removeClass('flash'))
   }
 }
