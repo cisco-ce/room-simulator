@@ -8,8 +8,7 @@ export default class Projector {
     projector.click(() => projectorModel.toggle());
     const beam = $('#lightfx-projector_1_');
 
-    console.warn('TODO add presentation image');
-    const image = '/images/presentation-canvas.png';
+    const image = './images/presentation-canvas.png';
     this.canvasImage = root
       .image(image, 980, 90, 310, 453)
       .attr('id', 'canvasImage');
