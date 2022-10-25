@@ -103,7 +103,7 @@ export default class SmallOffice {
       .click(this.idefixClicked.bind(this))
       .addClass('clickable')
       .attr('id', 'idefix');
-    this.idefix.setImage('/images/wallpaper.png');
+    this.idefix.setImage('./images/wallpaper.png');
 
     setTimeout(() => {
       this.osd1.set(true);
@@ -136,7 +136,7 @@ export default class SmallOffice {
 
   setupOutsideWorld(root) {
     const data = {};
-    const url = '/images/city.png';
+    const url = './images/city.png';
     // const url = '/images/beach.jpg';
 
     const x1 = 30 + (data.x ? data.x : 0);
@@ -152,7 +152,7 @@ export default class SmallOffice {
   }
 
   setupRightWindow(root) {
-    const url = '/images/city.png';
+    const url = './images/city.png';
     const x1 = 979;
     const y1 = 306 - 50;
     const h = 584 - y1;
@@ -206,16 +206,16 @@ export default class SmallOffice {
 
     switch (sourceIdentifier) {
       case 'appletv':
-        url = '/images/appletv.jpg';
+        url = './images/appletv.jpg';
         break;
       case 'bluray':
-        url = '/images/bluray.jpg';
+        url = './images/bluray.jpg';
         break;
       case 'tv':
-        url = '/images/tv.jpg';
+        url = './images/tv.jpg';
         break;
       default:
-        url = '/images/wallpaper.png';
+        url = './images/wallpaper.png';
     }
 
     this.osd1.setImage(url);
