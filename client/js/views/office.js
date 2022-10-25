@@ -296,7 +296,7 @@ export default class SmallOffice {
   }
 
   setupSwitches(root) {
-    this.switchBlindsUp = new Switch(root, 432, 401, 11, 6, 'blinds-up-switch');
+    this.switchBlindsUp = new Switch(root, 432, 401, 11, 6, 'blinds-up-switch', false);
     this.switchBlindsDown = new Switch(
       root,
       432,
@@ -304,6 +304,7 @@ export default class SmallOffice {
       11,
       6,
       'blinds-down-switch',
+      false,
     );
     this.switchBlindsUp.mousedown(() => this.curtainModel.upClicked());
     this.switchBlindsUp.mouseup(() => this.curtainModel.upOrDownReleased());
