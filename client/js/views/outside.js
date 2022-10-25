@@ -67,6 +67,6 @@ export default class Outside {
     this.flash.addClass('flash');
     this.view.add(this.outside);
     this.view.add(this.flash);
-    setTimeout(() => this.flash.removeClass('flash'))
+    setTimeout(() => this.flash.removeClass('flash'), 10);
   }
 }
