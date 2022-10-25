@@ -16,7 +16,11 @@
     <button @click="showConnectDialog(true)" x-show="connected">Connected</button>
   </header>
   <div id="simulator"></div>
-  <div class="fade" x-show="showConnect">
+  <div
+    class="fade"
+    x-show="showConnect"
+    @click="if($event.target.classList.contains('fade')) showConnectDialog(false)"
+  >
     <div class="dialog" x-show="!connected">
       <form>
         <div>Connect to video device</div>
@@ -34,8 +38,7 @@
         </div>
         <div>
           <button @click.prevent="connect()" :disabled="!connectValid()">Connect</button>
-          <button @click.prevent="showConnectDialog(false)">Cancel</button>
-        </div>
+         </div>
       </form>
     </div>
     <div class="dialog" x-show="connected">
@@ -50,9 +53,6 @@
             @click.prevent="removeUiExtensions()"
             :disabled="!hasUiExtensions"
           >Uninstall UI extensions</button>
-        </div>
-        <div>
-          <button @click.prevent="showConnectDialog(false)">Close</button>
         </div>
       </form>
     </div>
