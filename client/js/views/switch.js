@@ -10,6 +10,11 @@ export default class Switch {
       .addClass('clickable');
 
     if (id) this.button.attr('id', id);
+
+    this.sound = new Audio('./sounds/switch.mp3');
+    this.button.node.addEventListener('mousedown', () => {
+      this.sound.play();
+    })
   }
 
   click(listener) {
