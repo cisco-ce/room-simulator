@@ -22,6 +22,7 @@ export default class Curtain extends Model {
     this.hasTilting = hasTilting;
     this.tiltPos = 100; // 0 completely up, 50 fully horisontal, 100 completely down
     this.tiltSpeed = 0.8;
+    this.shadeSound = new Audio('./sounds/shades.m4a');
   }
 
   upClicked() {
@@ -63,7 +64,14 @@ export default class Curtain extends Model {
   start() {
     if (!this.timer) {
       this.timer = setInterval(this.update.bind(this), 20);
+      this.playSound();
     }
+  }
+
+  playSound() {
+    this.shadeSound.currentTime = 2;
+    this.shadeSound.loop = true;
+    this.shadeSound.play();
   }
 
   getSetpoint() {
@@ -88,6 +96,7 @@ export default class Curtain extends Model {
     this.setPoint = null;
     clearInterval(this.timer);
     this.timer = 0;
+    this.shadeSound.pause();
   }
 
   update() {
