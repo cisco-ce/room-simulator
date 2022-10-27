@@ -59,14 +59,22 @@ export default class Codec {
     return !!(lights && climate);
   }
 
-  unsetWidgetStatus(WidgetId) {
+  async unsetWidgetStatus(WidgetId) {
     if (!this.xapi) return;
-    this.xapi.Command.UserInterface.Extensions.Widget.UnsetValue({ WidgetId });
+    try {
+      await this.xapi.Command.UserInterface.Extensions.Widget.UnsetValue({ WidgetId });
+    }
+    catch(e) {
+    }
   }
 
-  setWidgetStatus(WidgetId, Value) {
+  async setWidgetStatus(WidgetId, Value) {
     if (!this.xapi) return;
-    this.xapi.Command.UserInterface.Extensions.Widget.SetValue({ WidgetId, Value });
+    try {
+      await this.xapi.Command.UserInterface.Extensions.Widget.SetValue({ WidgetId, Value });
+    }
+    catch(e) {
+    }
   }
 
   async getConnectorList(skipCamera = true) {
