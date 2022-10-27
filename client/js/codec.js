@@ -96,7 +96,7 @@ export default class Codec {
   }
 
   setExternalSourceState(SourceIdentifier, State) {
-    console.log('Set external source state', SourceIdentifier, State);
+    // console.log('Set external source state', SourceIdentifier, State);
     this.xapi.command('UserInterface/Presentation/ExternalSource/State/Set', {
       SourceIdentifier,
       State,
@@ -106,7 +106,7 @@ export default class Codec {
   selectExternalSource(SourceIdentifier) {
     if (!this.xapi) return;
 
-    console.log('Codec: Select external source', SourceIdentifier);
+    // console.log('Codec: Select external source', SourceIdentifier);
     if (SourceIdentifier) {
       this.xapi.command('UserInterface/Presentation/ExternalSource/Select', {
         SourceIdentifier,

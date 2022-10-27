@@ -17,7 +17,6 @@ const gui = {
   externalSourceConnector: 2,
 
   init() {
-    console.log('init gui');
     const device = localStorage.getItem('device');
     if (device) {
       this.device = JSON.parse(device);

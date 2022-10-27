@@ -259,9 +259,6 @@ export default class RoomAdapter {
     else if (event.Presentation?.ExternalSource?.Selected?.SourceIdentifier) {
       this.sourceList.onSourceSeleted(event.Presentation.ExternalSource.Selected.SourceIdentifier);
     }
-    else {
-      console.log('unknown event', event);
-    }
   }
 
   onWidgetEvent(widgetId, event, value) {

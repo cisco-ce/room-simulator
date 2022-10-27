@@ -23,7 +23,7 @@ async function init() {
   await officeView.loadRoom(container);
 
   // todo for dev testing
-  window.onEvent = (widgetId, event, value) => adapter.onEvent(widgetId, event, value);
+  window.onWidgetEvent = (widgetId, event, value) => adapter.onWidgetEvent(widgetId, event, value);
 }
 
 init();
