@@ -10,6 +10,7 @@ const codec = new Codec();
 
 // make the gui model available to index.html:
 window.gui = gui;
+window.codec = codec;
 gui.setCodec(codec);
 
 Alpine.start();
@@ -17,6 +18,7 @@ Alpine.start();
 async function init() {
   const officeView = new SmallOffice();
   const adapter = new RoomAdapter(codec, officeView);
+  gui.adapter = adapter;
   const container = document.getElementById('simulator');
   await officeView.loadRoom(container);
 

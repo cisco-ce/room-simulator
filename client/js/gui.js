@@ -11,8 +11,10 @@ const gui = {
     username: '',
     password: '',
   },
+  adapter: null,
   hasUiExtensions: false,
   codec: null,
+  externalSourceConnector: 2,
 
   init() {
     console.log('init gui');
@@ -32,8 +34,10 @@ const gui = {
       await this.codec.connect(this.device);
       this.connected = true;
       this.hasUiExtensions = await this.codec.hasUiExtensions();
+      this.adapter.initSources();
     }
     catch(e) {
+      alert('Not able to connect. Did you accept the device\'s certificate?');
       console.warn('Not able to connect', e);
     }
   },
@@ -44,6 +48,14 @@ const gui = {
 
   showConnectDialog(show) {
     this.showConnect = show;
+  },
+
+  addSources() {
+    this.adapter.initSources(this.externalSourceConnector);
+  },
+
+  removeSources() {
+    this.codec.removeAllExternalSources();
   },
 
   async installUiExtensions() {

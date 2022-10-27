@@ -55,39 +55,26 @@ export default class RoomAdapter {
   setupSources() {
     this.sourceList = new SourceList(this.codec);
     this.view.setSourceModel(this.sourceList);
-    this.initSources();
   }
 
-  initSources() {
-    // const adapter = this.codec.getExternalSourceAdapter();
-    const adapter = null; // Disable for now
+  async initSources() {
+    const adapter = this.codec;
     if (!adapter) return;
 
-    adapter.setSelectListener(this.sourceList);
     adapter.removeAllExternalSources();
 
-    // TODO should probably uses promises instead of timeouts
-    // need to wait a bit to make sure previous commands are done
     const sources = this.sourceList.getSources();
-    setTimeout(() => {
-      for (const [id, source] of sources) {
-        adapter.addExternalSource(
-          source.connectorId,
-          source.name,
-          id,
-          source.type,
-        );
-      }
-    }, 2000);
-
-    // wait until sources have been created
-    setTimeout(() => {
-      for (const [id, source] of sources) {
-        source.addListener(() => {
-          adapter.setExternalSourceState('', id, source.state);
-        });
-      }
-    }, 4000);
+    for (const [id, source] of sources) {
+      await adapter.addExternalSource(
+        source.connectorId,
+        source.name,
+        id,
+        source.type,
+      );
+      source.addListener(() => {
+        adapter.setExternalSourceState(id, source.state);
+      });
+    }
   }
 
   setupOutside() {
@@ -264,10 +251,16 @@ export default class RoomAdapter {
   }
 
   onEvent(event) {
+    // console.log(event);
     if (event.Extensions?.Widget?.Action) {
-      // console.log(event);
       const { WidgetId, Type, Value } = event.Extensions.Widget.Action;
       this.onWidgetEvent(WidgetId, Type, Value);
+    }
+    else if (event.Presentation?.ExternalSource?.Selected?.SourceIdentifier) {
+      this.sourceList.onSourceSeleted(event.Presentation.ExternalSource.Selected.SourceIdentifier);
+    }
+    else {
+      console.log('unknown event', event);
     }
   }
 

@@ -54,6 +54,12 @@
             :disabled="!hasUiExtensions"
           >Uninstall UI extensions</button>
         </div>
+        <div>
+          <button @click.prevent="addSources()">Add external video sources</button>
+        </div>
+        <div>
+          <button @click.prevent="removeSources()">Remove external video sources</button>
+        </div>
       </form>
     </div>
   </div>

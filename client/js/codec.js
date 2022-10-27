@@ -68,4 +68,41 @@ export default class Codec {
     if (!this.xapi) return;
     this.xapi.Command.UserInterface.Extensions.Widget.SetValue({ WidgetId, Value });
   }
+
+  async getConnectorList(skipCamera = true) {
+    const list = await this.xapi.Config.Video.Input.Connector.get();
+    return skipCamera ? list.filter(i => i.InputSourceType !== 'camera') : list;
+  }
+
+  addExternalSource(ConnectorId, Name, SourceIdentifier, Type) {
+    this.xapi.command('UserInterface/Presentation/ExternalSource/Add', {
+      ConnectorId,
+      Name,
+      SourceIdentifier,
+      Type,
+    });
+  }
+
+  removeAllExternalSources() {
+    this.xapi.command('UserInterface/Presentation/ExternalSource/RemoveAll');
+  }
+
+  setExternalSourceState(SourceIdentifier, State) {
+    console.log('Set external source state', SourceIdentifier, State);
+    this.xapi.command('UserInterface/Presentation/ExternalSource/State/Set', {
+      SourceIdentifier,
+      State,
+    });
+  }
+
+  selectExternalSource(SourceIdentifier) {
+    if (!this.xapi) return;
+
+    console.log('Codec: Select external source', SourceIdentifier);
+    if (SourceIdentifier) {
+      this.xapi.command('UserInterface/Presentation/ExternalSource/Select', {
+        SourceIdentifier,
+      });
+    }
+  }
 };
