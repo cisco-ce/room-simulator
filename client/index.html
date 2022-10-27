@@ -16,6 +16,7 @@
     <button @click="showConnectDialog(true)" x-show="connected">Connected</button>
   </header>
   <div id="simulator"></div>
+  <pre class="eventlog" x-show="showEvents" x-text="events.join('\n')"></pre>
   <div
     class="fade"
     x-show="showConnect"
@@ -59,6 +60,9 @@
         </div>
         <div>
           <button @click.prevent="removeSources()">Remove external video sources</button>
+        </div>
+        <div>
+          <button @click.prevent="showEvents = !showEvents">Toggle event console</button>
         </div>
       </form>
     </div>

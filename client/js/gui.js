@@ -3,6 +3,21 @@ async function fetchText(url) {
   return res.text();
 }
 
+function toText(event) {
+  if (event.Extensions?.Widget?.Action) {
+    const e = event.Extensions?.Widget?.Action;
+    const path = 'UserInterface Extension Widget Action';
+    const w = `WidgetId: "${e.WidgetId}"`;
+    const t = `Type: "${e.Type}"`;
+    const v = `Value: "${e.Value}"`;
+    return `${path} ${w} \n${path} ${t} \n${path} ${v}`;
+  }
+  else if (event.Extensions?.Panel?.Clicked) {
+    const id = event.Extensions.Panel.Clicked.PanelId;
+    return `UserInterface Extensions Panel Clicked PanelId: "${id}"`;
+  }
+}
+
 const gui = {
   showConnect: false,
   connected: false,
@@ -11,9 +26,11 @@ const gui = {
     username: '',
     password: '',
   },
+  events: ['Welcome to\nCisco Codec RoomOS\n'],
   adapter: null,
   hasUiExtensions: false,
   codec: null,
+  showEvents: false,
   externalSourceConnector: 2,
 
   init() {
@@ -25,6 +42,10 @@ const gui = {
 
   setCodec(codec) {
     this.codec = codec;
+
+    codec.guiListener = event => {
+      this.events = this.events.concat([toText(event)]);
+    }
   },
 
   async connect() {
@@ -34,6 +55,7 @@ const gui = {
       this.connected = true;
       this.hasUiExtensions = await this.codec.hasUiExtensions();
       this.adapter.initSources();
+      this.setCodec(this.codec);
     }
     catch(e) {
       alert('Not able to connect. Did you accept the device\'s certificate?');

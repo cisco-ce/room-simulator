@@ -3,6 +3,7 @@ export default class Codec {
   constructor() {
     this.xapi = null;
     this.listener = null;
+    this.guiListener = null;
   }
 
   connect(device) {
@@ -33,6 +34,9 @@ export default class Codec {
     this.xapi.Event.UserInterface.on((event) => {
       if (this.listener) {
         this.listener(event);
+      }
+      if (this.guiListener) {
+        this.guiListener(event);
       }
     });
   }

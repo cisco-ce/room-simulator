@@ -110,3 +110,21 @@ form input {
 .flash {
   opacity: 1;
 }
+
+.eventlog {
+  font-size: 12px;
+  position: absolute;
+  top: 4em;
+  border-radius: 1em;;
+  left: calc(50% - 300px);
+  width: 600px;
+  padding: 1em 2em;
+  background-color: black;
+  color: white;
+  font-family: monospace;
+  overflow-y: auto;
+  max-height: 40vh;
+  opacity: 0.9;
+  resize: both;
+  white-space: pre-wrap;
+}
