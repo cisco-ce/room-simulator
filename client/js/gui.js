@@ -33,9 +33,15 @@ const gui = {
   setCodec(codec) {
     this.codec = codec;
 
-    codec.guiListener = event => {
-      this.events = this.events.concat([event]);
-    }
+    codec.guiListener = event => this.onEvent(event);
+  },
+
+  onEvent(event) {
+
+    const log = document.querySelector(".eventlog");
+    this.events = this.events.concat([event]);
+
+    log.scrollTop = log.scrollHeight;
   },
 
   async connect() {

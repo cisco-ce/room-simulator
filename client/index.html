@@ -49,7 +49,9 @@
     <div class="dialog" x-show="connected">
       <form>
         <div>Connected to video device</div>
-        <div>Host: <label x-text="device.host"></label></div>
+        <div>Host:
+          <a :href="'https://' +device.host" target="_blank" x-text=" device.host"></a>
+        </div>
         <div>
           <button @click.prevent="installUiExtensions()">Install UI extensions</button>
         </div>
