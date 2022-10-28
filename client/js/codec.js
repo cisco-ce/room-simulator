@@ -87,6 +87,7 @@ export default class Codec {
   }
 
   addExternalSource(ConnectorId, Name, SourceIdentifier, Type) {
+    console.log('add source', Name, Type, 'to connector', ConnectorId);
     this.xapi.command('UserInterface/Presentation/ExternalSource/Add', {
       ConnectorId,
       Name,

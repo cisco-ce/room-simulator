@@ -57,6 +57,8 @@
         </div>
         <div>
           <button @click.prevent="addSources()">Add external video sources</button>
+          Connector:
+          <input placeholder="Connector" x-model="externalSourceConnector" id="connectorId"/>
         </div>
         <div>
           <button @click.prevent="removeSources()">Remove external video sources</button>

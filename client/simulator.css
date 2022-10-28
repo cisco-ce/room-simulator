@@ -118,13 +118,19 @@ form input {
   border-radius: 1em;;
   left: calc(50% - 300px);
   width: 600px;
+  min-width: 300px;
   padding: 1em 2em;
   background-color: black;
   color: white;
   font-family: monospace;
   overflow-y: auto;
   max-height: 40vh;
+  min-height: 4em;
   opacity: 0.9;
   resize: both;
   white-space: pre-wrap;
+}
+
+#connectorId {
+  width: 3em;
 }

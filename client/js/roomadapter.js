@@ -57,7 +57,7 @@ export default class RoomAdapter {
     this.view.setSourceModel(this.sourceList);
   }
 
-  async initSources() {
+  async initSources(connectorId) {
     const adapter = this.codec;
     if (!adapter) return;
 
@@ -66,7 +66,7 @@ export default class RoomAdapter {
     const sources = this.sourceList.getSources();
     for (const [id, source] of sources) {
       await adapter.addExternalSource(
-        source.connectorId,
+        connectorId,
         source.name,
         id,
         source.type,

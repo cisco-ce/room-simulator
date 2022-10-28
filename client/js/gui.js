@@ -16,6 +16,10 @@ function toText(event) {
     const id = event.Extensions.Panel.Clicked.PanelId;
     return `UserInterface Extensions Panel Clicked PanelId: "${id}"`;
   }
+  else if (event.Presentation?.ExternalSource?.Selected?.SourceIdentifier) {
+    const id = event.Presentation?.ExternalSource?.Selected?.SourceIdentifier;
+    return `UserInterface Presentation ExternalSource Selected SourceIdentifier: "${id}"`
+  }
 }
 
 const gui = {
@@ -54,7 +58,7 @@ const gui = {
       await this.codec.connect(this.device);
       this.connected = true;
       this.hasUiExtensions = await this.codec.hasUiExtensions();
-      this.adapter.initSources();
+      this.adapter.initSources(this.externalSourceConnector);
       this.setCodec(this.codec);
     }
     catch(e) {

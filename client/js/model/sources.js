@@ -1,13 +1,11 @@
 // TODO
 // * Report bug: when adding sources and tapping select after, it does not get selected in sharetray until reopen
 // * Feedback listener gets accumulated when adding/removing sources
-// * Possible to select input connector
 import Model from './model';
 
 class Source extends Model {
-  constructor(sourceIdentifier, name, connectorId) {
+  constructor(sourceIdentifier, name) {
     super();
-    this.connectorId = connectorId;
     this.sourceIdentifier = sourceIdentifier;
     this.name = name;
     this.type = 'mediaplayer';
@@ -38,11 +36,11 @@ export default class SourceList extends Model {
     this.selectFirstAvailable();
   }
 
-  createSources(connectorId = 2) {
+  createSources() {
     this.sources = new Map();
-    this.sources.set('appletv', new Source('appletv', 'Apple TV', connectorId));
-    this.sources.set('bluray', new Source('bluray', 'Blu-ray', connectorId));
-    this.sources.set('tv', new Source('tv', 'TV', connectorId));
+    this.sources.set('appletv', new Source('appletv', 'Apple TV'));
+    this.sources.set('bluray', new Source('bluray', 'Blu-ray'));
+    this.sources.set('tv', new Source('tv', 'TV'));
   }
 
   getSources() {
