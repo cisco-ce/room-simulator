@@ -3,25 +3,6 @@ async function fetchText(url) {
   return res.text();
 }
 
-function toText(event) {
-  if (event.Extensions?.Widget?.Action) {
-    const e = event.Extensions?.Widget?.Action;
-    const path = 'UserInterface Extension Widget Action';
-    const w = `WidgetId: "${e.WidgetId}"`;
-    const t = `Type: "${e.Type}"`;
-    const v = `Value: "${e.Value}"`;
-    return `${path} ${w} \n${path} ${t} \n${path} ${v}`;
-  }
-  else if (event.Extensions?.Panel?.Clicked) {
-    const id = event.Extensions.Panel.Clicked.PanelId;
-    return `UserInterface Extensions Panel Clicked PanelId: "${id}"`;
-  }
-  else if (event.Presentation?.ExternalSource?.Selected?.SourceIdentifier) {
-    const id = event.Presentation?.ExternalSource?.Selected?.SourceIdentifier;
-    return `UserInterface Presentation ExternalSource Selected SourceIdentifier: "${id}"`
-  }
-}
-
 const gui = {
   showConnect: false,
   connected: false,
@@ -48,7 +29,7 @@ const gui = {
     this.codec = codec;
 
     codec.guiListener = event => {
-      this.events = this.events.concat([toText(event)]);
+      this.events = this.events.concat([event]);
     }
   },
 

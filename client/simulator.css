@@ -116,8 +116,8 @@ form input {
   position: absolute;
   top: 4em;
   border-radius: 1em;;
-  left: calc(50% - 300px);
-  width: 600px;
+  left: calc(50% - 350px);
+  width: 700px;
   min-width: 300px;
   padding: 1em 2em;
   background-color: black;
