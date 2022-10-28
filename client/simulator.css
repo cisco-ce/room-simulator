@@ -112,7 +112,7 @@ form input {
 }
 
 .eventlog {
-  font-size: 12px;
+  font-size: 10px;
   position: absolute;
   top: 4em;
   border-radius: 1em;;
@@ -122,13 +122,26 @@ form input {
   padding: 1em 2em;
   background-color: black;
   color: white;
-  font-family: monospace;
   overflow-y: auto;
   max-height: 40vh;
   min-height: 4em;
   opacity: 0.9;
-  resize: both;
+}
+
+.eventlog::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
+.eventlog pre {
+  font-family: monospace;
   white-space: pre-wrap;
+}
+
+.eventlog .close {
+  position: absolute;
+  color: white;
+  top: 1em;
+  right: 1em;
 }
 
 #connectorId {

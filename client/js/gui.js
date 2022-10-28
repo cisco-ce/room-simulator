@@ -1,3 +1,6 @@
+import $ from 'jquery';
+import 'jqueryui';
+
 async function fetchText(url) {
   const res = await fetch(url);
   return res.text();
@@ -15,7 +18,7 @@ const gui = {
   adapter: null,
   hasUiExtensions: false,
   codec: null,
-  showEvents: false,
+  showTerminal: false,
   externalSourceConnector: 2,
 
   init() {
@@ -23,6 +26,8 @@ const gui = {
     if (device) {
       this.device = JSON.parse(device);
     }
+
+    $('.eventlog').resizable().draggable();
   },
 
   setCodec(codec) {
