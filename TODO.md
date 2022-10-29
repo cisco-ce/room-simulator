@@ -1,30 +1,9 @@
 # Simulator TODO
 
-- Add to github and github pages
-
-- Show api panel
+- Intro page when opening sim
 - Replace room system with board pro? (designer help)
-- Use requestanimationframe instad of setInterval. test in other browsers
-- Tweak ui extension panel. use emojis? add presets
-- Make virtual sources work
 - Toggle help (show clickable elements)
-
-
-
-# What to keep from previous sim:
-* Room visualistations of lights, shades, projectors
-* Clickable elements
-* Simulator for lights, shades, projecttor
-* Mapping from xapi to internal model
-* Possible to add / remove ui extension config easily (if not present)
-* Virtual sources simulator (but might need improvement)
-
-# What to change
-* Host externally, connect to
-* Better event viewer. show xapi events in full, simulate tshell?
-* Dont use jquery, maybe not snap
-* Remove virtual touch panel (for now)
-* Add sounds
+- Turn on media devices from touch panel
 
 
 # If time and mood allows it:

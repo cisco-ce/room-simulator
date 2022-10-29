@@ -29,7 +29,7 @@ export default class Codec {
   connect(device) {
     const prot = location.protocol === 'https:' ? 'wss://' : 'ws://';
     const { host, username, password } = device;
-    console.log('connecting to', prot + host, username);
+
     const connect = new Promise((resolve, reject) => {
       window.jsxapi.connect(prot + host, { username, password })
         .on('ready', async (xapi) => {
@@ -115,6 +115,12 @@ export default class Codec {
   async getConnectorList(skipCamera = true) {
     const list = await this.xapi.Config.Video.Input.Connector.get();
     return skipCamera ? list.filter(i => i.InputSourceType !== 'camera') : list;
+  }
+
+  async hasExternalSources() {
+    if (!this.xapi) return;
+    const list = await this.xapi.Command.UserInterface.Presentation.ExternalSource.List();
+    return list?.Source?.length > 0;
   }
 
   addExternalSource(ConnectorId, Name, SourceIdentifier, Type) {

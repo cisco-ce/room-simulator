@@ -16,7 +16,10 @@
     <button @click="showConnectDialog(true)" x-show="!connected">Connect</button>
     <button @click="showConnectDialog(true)" x-show="connected">Connected</button>
   </header>
-  <div id="simulator"></div>
+  <div
+    id="simulator"
+    :class="showConnect ? 'blur' : ''"
+  ></div>
   <div class="eventlog" x-show="showTerminal">
     <pre x-text="events.join('\n')"></pre>
     <button class="close" @click="showTerminal = false">x</button>
@@ -52,25 +55,41 @@
         <div>Host:
           <a :href="'https://' +device.host" target="_blank" x-text=" device.host"></a>
         </div>
-        <div>
-          <button @click.prevent="installUiExtensions()">Install UI extensions</button>
-        </div>
-        <div>
+        <div class="row">
+          <div class="symbol">🎨</div>
+          <label><b>UI extensions</b><br/>
+            Panels to control the lights, shades etc in the room from your touch controller.</label>
+          <button @click.prevent="installUiExtensions()" x-show="!hasUiExtensions">Install </button>
           <button
             @click.prevent="removeUiExtensions()"
-            :disabled="!hasUiExtensions"
+            x-show="hasUiExtensions"
           >Uninstall UI extensions</button>
         </div>
-        <div>
-          <button @click.prevent="addSources()">Add external video sources</button>
-          Connector:
-          <input placeholder="Connector" x-model="externalSourceConnector" id="connectorId"/>
+        <div class="row">
+          <div class="symbol">🖥</div>
+          <label><b>Virtual sources</b><br/>Set the media players as external sources so you can select them from the share tray.</label>
+          <div>
+            <button x-show="!hasExternalSources" @click.prevent="addSources()">Install</button>
+            <button x-show="hasExternalSources" @click.prevent="removeSources()">Remove</button>
+            <br/>
+            <select x-model="externalSourceConnector" x-show="!hasExternalSources">
+              <template x-for="connector in connectors" title="Input connector">
+                <option
+                  value="connector.id"
+                  x-text="connector.id + ': ' + connector.Name"
+                ></option>
+              </template>
+            </select>
+          </div>
         </div>
-        <div>
-          <button @click.prevent="removeSources()">Remove external video sources</button>
-        </div>
-        <div>
-          <button @click.prevent="showTerminal = !showTerminal">Toggle event console</button>
+        <div class="row">
+          <div class="symbol">🔎</div>
+          <label><b>View APIs</b>
+            <br/>Show events and commands in a terminal-like window.</label>
+          <button
+            @click.prevent="showTerminal = !showTerminal"
+            x-text="showTerminal ? 'Hide' : 'Show'"
+          ></button>
         </div>
       </form>
     </div>

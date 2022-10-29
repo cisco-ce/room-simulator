@@ -99,6 +99,39 @@ form button {
 
 form input {
   background: #eee;
+  margin-bottom: 1em;
+}
+
+.blur {
+  filter: blur(3px);
+}
+
+form .row {
+  display: flex;
+  width: 100%;
+  padding-top: 1em;
+  border-top: 1px solid #ccc;
+  gap: 2em;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+form .row label {
+  flex-grow: 1;
+  text-align: left;
+  width: 350px;
+}
+
+.row .symbol {
+  font-size: 50px;
+}
+
+select {
+  background: #ddd;
+  margin: 1em 0;
+  border: 0;
+  padding: 0.5em;
+  border-radius: 5px;
 }
 
 .window {

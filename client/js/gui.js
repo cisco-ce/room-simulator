@@ -20,6 +20,10 @@ const gui = {
   codec: null,
   showTerminal: false,
   externalSourceConnector: 2,
+  hasExternalSources: false,
+  connectors: [
+    // { Name: 'HDMI', id: 1, InputSourceType: 'PC' },
+  ],
 
   init() {
     const device = localStorage.getItem('device');
@@ -50,7 +54,8 @@ const gui = {
       await this.codec.connect(this.device);
       this.connected = true;
       this.hasUiExtensions = await this.codec.hasUiExtensions();
-      this.adapter.initSources(this.externalSourceConnector);
+      this.connectors = await this.codec.getConnectorList();
+      this.hasExternalSources = await this.codec.hasExternalSources();
       this.setCodec(this.codec);
     }
     catch(e) {
@@ -67,12 +72,16 @@ const gui = {
     this.showConnect = show;
   },
 
-  addSources() {
-    this.adapter.initSources(this.externalSourceConnector);
+  async addSources() {
+    await this.adapter.initSources(this.externalSourceConnector);
+    this.hasExternalSources = true;
+    alert('The share tray now contains the media players in this room.');
   },
 
-  removeSources() {
-    this.codec.removeAllExternalSources();
+  async removeSources() {
+    await this.codec.removeAllExternalSources();
+    this.hasExternalSources = false;
+    alert('The external sources were removed from the share tray.');
   },
 
   async installUiExtensions() {
