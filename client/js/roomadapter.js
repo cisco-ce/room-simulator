@@ -55,6 +55,24 @@ export default class RoomAdapter {
   setupSources() {
     this.sourceList = new SourceList(this.codec);
     this.view.setSourceModel(this.sourceList);
+    this.addCodecListener('power_appletv', 'changed', (value) => {
+      this.sourceList.togglePower('appletv', value === 'on');
+    });
+    this.addCodecListener('power_bluray', 'changed', (value) => {
+      this.sourceList.togglePower('bluray', value === 'on');
+    });
+    this.addCodecListener('power_tv', 'changed', (value) => {
+      this.sourceList.togglePower('tv', value === 'on');
+    });
+    this.sourceList.addListener(() => {
+      const tv = this.sourceList.isOn('tv');
+      this.setWidgetStatus('power_tv', tv ? 'on' : 'off');
+      const bluray = this.sourceList.isOn('bluray');
+      this.setWidgetStatus('power_bluray', bluray ? 'on' : 'off');
+      const appleTv = this.sourceList.isOn('appleTv');
+      this.setWidgetStatus('power_appletv', appleTv ? 'on' : 'off');
+    });
+
   }
 
   async initSources(connectorId) {

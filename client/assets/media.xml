@@ -1,0 +1,68 @@
+<Extensions>
+  <Version>1.9</Version>
+  <Panel>
+    <Order>1</Order>
+    <PanelId>uisim_media</PanelId>
+    <Origin>local</Origin>
+    <Location>HomeScreen</Location>
+    <Icon>Tv</Icon>
+    <Color>#875AE0</Color>
+    <Name>Media</Name>
+    <ActivityType>Custom</ActivityType>
+    <Page>
+      <Name>Media</Name>
+      <Row>
+        <Name>Row</Name>
+        <Widget>
+          <WidgetId>widget_3</WidgetId>
+          <Name>🍎 Apple TV</Name>
+          <Type>Text</Type>
+          <Options>size=3;fontSize=normal;align=left</Options>
+        </Widget>
+        <Widget>
+          <WidgetId>power_appletv</WidgetId>
+          <Type>ToggleButton</Type>
+          <Options>size=1</Options>
+        </Widget>
+      </Row>
+      <Row>
+        <Name>Row</Name>
+        <Widget>
+          <WidgetId>widget_3</WidgetId>
+          <Name>📺 TV</Name>
+          <Type>Text</Type>
+          <Options>size=3;fontSize=normal;align=left</Options>
+        </Widget>
+        <Widget>
+          <WidgetId>power_tv</WidgetId>
+          <Type>ToggleButton</Type>
+          <Options>size=1</Options>
+        </Widget>
+      </Row>
+      <Row>
+        <Name>Row</Name>
+        <Widget>
+          <WidgetId>widget_3</WidgetId>
+          <Name>💿 Blu-Ray</Name>
+          <Type>Text</Type>
+          <Options>size=3;fontSize=normal;align=left</Options>
+        </Widget>
+        <Widget>
+          <WidgetId>power_bluray</WidgetId>
+          <Type>ToggleButton</Type>
+          <Options>size=1</Options>
+        </Widget>
+      </Row>
+      <Row>
+        <Name>Row</Name>
+        <Widget>
+          <WidgetId>widget_4</WidgetId>
+          <Name>Turn on/off media players in the room. You can use the share tray to switch between them.</Name>
+          <Type>Text</Type>
+          <Options>size=4;fontSize=small;align=left</Options>
+        </Widget>
+      </Row>
+      <Options>hideRowNames=1</Options>
+    </Page>
+  </Panel>
+</Extensions>

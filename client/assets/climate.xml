@@ -1,11 +1,12 @@
 <Extensions>
   <Version>1.9</Version>
   <Panel>
-    <Order>3</Order>
+    <Order>2</Order>
     <PanelId>uisim_climate</PanelId>
+    <Origin>local</Origin>
     <Location>HomeScreenAndCallControls</Location>
     <Icon>Hvac</Icon>
-    <Color>#875AE0</Color>
+    <Color>#148579</Color>
     <Name>Climate</Name>
     <ActivityType>Custom</ActivityType>
     <Page>

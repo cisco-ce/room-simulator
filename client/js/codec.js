@@ -87,9 +87,7 @@ export default class Codec {
   async hasUiExtensions() {
     const list = await this.xapi.Command.UserInterface.Extensions.List();
     const panels = list.Extensions?.Panel || [];
-    const lights =  panels.find(p => p.PanelId === 'uisim_lights');
-    const climate =  panels.find(p => p.PanelId === 'uisim_climate');
-    return !!(lights && climate);
+    return panels.some(p => p.PanelId.startsWith('uisim_'));
   }
 
   async unsetWidgetStatus(WidgetId) {
@@ -156,7 +154,7 @@ export default class Codec {
       this.reportCommand(`xCommand UserInterface Presentation ExternalSource Select SourceIdentifier: "${SourceIdentifier}"`);
       this.xapi.command('UserInterface/Presentation/ExternalSource/Select', {
         SourceIdentifier,
-      });
+      }).catch(console.warn);
     }
   }
 };

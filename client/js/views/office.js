@@ -284,6 +284,15 @@ export default class SmallOffice {
       this.projector.setAmbience(this.ambience.getDarkness());
     });
 
+    this.sourcesModel.addListener(() => {
+      const tv = this.sourcesModel.isOn('tv');
+      this.setElementVisible('#lightfx-tv-decoder', tv);
+      const bluray = this.sourcesModel.isOn('bluray');
+      this.setElementVisible('#lightfx-blu-ray', bluray);
+      const appleTv = this.sourcesModel.isOn('appletv');
+      this.setElementVisible('#lightfx-apple-tv', appleTv);
+    });
+
     // make sure light rays are above room darkness
     this.blindsFront.getBeams().insertAfter(root.select('#room-brightness_1_'));
     this.blindsBack.getBeams().insertAfter(root.select('#room-brightness_1_'));

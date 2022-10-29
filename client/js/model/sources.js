@@ -55,8 +55,13 @@ export default class SourceList extends Model {
     return this.selectedSourceIdentifier;
   }
 
-  togglePower(sourceIdentifier) {
-    const willTurnOn = !this.getSource(sourceIdentifier).isReady();
+  isOn(sourceIdentifier) {
+    const source = this.getSource(sourceIdentifier);
+    return source?.getState() === 'Ready';
+  }
+
+  togglePower(sourceIdentifier, on) {
+    const willTurnOn = typeof on === 'boolean' ? on : !this.getSource(sourceIdentifier).isReady();
 
     this.getSource(sourceIdentifier).setState(
       willTurnOn ? 'Ready' : 'NotReady',
@@ -88,7 +93,6 @@ export default class SourceList extends Model {
   }
 
   selectSource(sourceIdentifier) {
-    // disable for now
     const adapter = this.codec;
     if (adapter) {
       adapter.selectExternalSource(sourceIdentifier);
