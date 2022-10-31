@@ -3,7 +3,6 @@
 - Intro page when opening sim
 - Replace room system with board pro? (designer help)
 - Toggle help (show clickable elements)
-- Turn on media devices from touch panel
 
 
 # If time and mood allows it:

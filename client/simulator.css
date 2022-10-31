@@ -19,6 +19,10 @@ html, body {
   cursor: pointer;
 }
 
+.led {
+  fill: #3ca4d3;
+}
+
 header {
   position: absolute;
   top: 0;

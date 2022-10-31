@@ -1,5 +1,11 @@
 export default class Switch {
-  constructor(snap, x, y, w, h, id, hasSound = true) {
+  constructor(snap, x, y, w, h, id, hasSound = true, light = false) {
+    if (light) {
+      snap
+        .rect(x, y, w - 2, 1)
+        .addClass('led');
+    }
+
     this.button = snap
       .rect(x, y, w, h)
       .attr({
@@ -9,7 +15,9 @@ export default class Switch {
       })
       .addClass('clickable');
 
-    if (id) this.button.attr('id', id);
+    if (id) {
+      this.button.attr('id', id);
+    }
 
     this.sound = new Audio('./sounds/switch.mp3');
     this.button.node.addEventListener('mousedown', () => {
@@ -17,6 +25,7 @@ export default class Switch {
         this.sound.play();
       }
     });
+
   }
 
   click(listener) {

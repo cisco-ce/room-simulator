@@ -14,16 +14,18 @@ export default class Projector {
       .attr('id', 'canvasImage');
     beam.add(this.canvasImage); // must be on top of darkness layer
     $('#canvasImage').hide();
+
     const powerLight = root.select('#lightfx-projector-power');
+    powerLight.removeClass('st129');
     projectorModel.addListener(() => {
       if (projectorModel.isOn()) {
         beam.fadeIn(1000);
         $('#canvasImage').fadeIn(1000);
-        powerLight.attr('display', 'block');
+        powerLight.attr('fill', '#3ca4d3');
       } else {
         beam.fadeOut(1000);
         $('#canvasImage').fadeOut(1000);
-        powerLight.attr('display', 'none');
+        powerLight.attr('fill', '#e17171');
       }
     });
   }

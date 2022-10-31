@@ -299,16 +299,8 @@ export default class SmallOffice {
   }
 
   setupSwitches(root) {
-    this.switchBlindsUp = new Switch(root, 432, 401, 11, 6, 'blinds-up-switch', false);
-    this.switchBlindsDown = new Switch(
-      root,
-      432,
-      411,
-      11,
-      6,
-      'blinds-down-switch',
-      false,
-    );
+    this.switchBlindsUp = new Switch(root, 432, 399, 11, 6, 'blinds-up-switch', false, true);
+    this.switchBlindsDown = new Switch(root, 432, 409, 11, 6, 'blinds-down-switch', false, true);
     this.switchBlindsUp.mousedown(() => this.curtainModel.upClicked());
     this.switchBlindsUp.mouseup(() => this.curtainModel.upOrDownReleased());
     this.switchBlindsUp.click(() => {}); // prevent propagation
@@ -316,29 +308,15 @@ export default class SmallOffice {
     this.switchBlindsDown.mouseup(() => this.curtainModel.upOrDownReleased());
     this.switchBlindsDown.click(() => {}); // prevent propagation
 
-    this.switchCanvasUp = new Switch(root, 932, 398, 15, 9, 'canvas-up-switch');
+    this.switchCanvasUp = new Switch(root, 932, 399, 11, 9, 'canvas-up-switch', true, true);
     this.switchCanvasUp.mousedown(() => this.canvasModel.setSetpoint(0));
-    this.switchCanvasDown = new Switch(
-      root,
-      932,
-      411,
-      15,
-      9,
-      'canvas-down-switch',
-    );
+    this.switchCanvasDown = new Switch(root, 932, 409, 11, 9, 'canvas-down-switch', true, true);
     this.switchCanvasDown.mousedown(() => this.canvasModel.setSetpoint(100));
     this.switchCanvasUp.click(() => {}); // prevent propagation
     this.switchCanvasDown.click(() => {}); // prevent propagation
 
-    this.switchLightUp = new Switch(root, 909, 398, 15, 9, 'lights-up-switch');
-    this.switchLightDown = new Switch(
-      root,
-      909,
-      411,
-      15,
-      9,
-      'lights-down-switch',
-    );
+    this.switchLightUp = new Switch(root, 912, 399, 11, 9, 'lights-up-switch', true, true);
+    this.switchLightDown = new Switch(root, 912, 409, 11, 9, 'lights-down-switch', true, true);
     this.switchLightUp.mousedown(() => this.lampModel.lightUpPressed());
     this.switchLightDown.mousedown(() => this.lampModel.lightDownPressed());
     this.switchLightUp.mouseup(() => this.lampModel.lightUpReleased());
