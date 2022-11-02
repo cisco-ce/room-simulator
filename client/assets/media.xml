@@ -1,7 +1,7 @@
 <Extensions>
   <Version>1.9</Version>
   <Panel>
-    <Order>1</Order>
+    <Order>5</Order>
     <PanelId>uisim_media</PanelId>
     <Origin>local</Origin>
     <Location>HomeScreen</Location>
