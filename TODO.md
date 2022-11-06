@@ -13,7 +13,6 @@ Developer
 
 Designer
 - left wall: immersive window
-- lights on canvas switches
 - canvas: looks very dark when room is not 100% lit
 - whiteboard path illustration (to animate)
 - gradients in edges,corners
