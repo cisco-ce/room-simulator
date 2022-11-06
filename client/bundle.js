@@ -244,11 +244,13 @@ const gui = {
     localStorage.setItem('device', JSON.stringify(this.device));
     try {
       await this.codec.connect(this.device);
+      this.showConnect = false;
       this.connected = true;
       this.hasUiExtensions = await this.codec.hasUiExtensions();
       this.connectors = await this.codec.getConnectorList();
       this.hasExternalSources = await this.codec.hasExternalSources();
       this.setCodec(this.codec);
+      this.adapter.setConnected(true);
     }
     catch(e) {
       alert('Not able to connect. Did you accept the device\'s certificate?');
@@ -973,7 +975,7 @@ class RoomAdapter {
       this.setWidgetStatus('power_tv', tv ? 'on' : 'off');
       const bluray = this.sourceList.isOn('bluray');
       this.setWidgetStatus('power_bluray', bluray ? 'on' : 'off');
-      const appleTv = this.sourceList.isOn('appleTv');
+      const appleTv = this.sourceList.isOn('appletv');
       this.setWidgetStatus('power_appletv', appleTv ? 'on' : 'off');
     });
 
@@ -1149,6 +1151,10 @@ class RoomAdapter {
         this.hvac.decrease();
       }
     });
+  }
+
+  setConnected(connected) {
+    this.view.setConnected(connected);
   }
 
   setWidgetStatus(widgetId, value) {
@@ -1851,12 +1857,13 @@ class SmallOffice {
   constructor() {
   }
 
-  hideUnused() {
+  hideInitially() {
     this.setElementVisible('#phone_1_', false);
     this.setElementVisible('#lightfx-switch-canvas', false);
     this.setElementVisible('#switch-HVAC_2_', false);
     this.setElementVisible('#laptop_1_', false);
     this.setOnScreenHelpVisible(false);
+    this.setConnected(false);
   }
 
   setOnScreenHelpVisible(visible) {
@@ -1890,7 +1897,7 @@ class SmallOffice {
     this.setupOutsideWorld(this.root);
     paintRoom(this.root);
     this.setupDrone(this.root);
-    this.hideUnused();
+    this.hideInitially();
     this.addHints();
   }
 
@@ -2014,6 +2021,12 @@ class SmallOffice {
     // TODO
     // const hint = Snap.parse(`<title>${text}</title>`);
     // this.element.select(element).append(hint);
+  }
+
+  setConnected(connected) {
+    this.setElementVisible('#touch10_1_', connected);
+    this.setElementVisible('.monitor', connected);
+    this.setElementVisible('#endpoint_1_', connected);
   }
 
   setOsdImage(sourceIdentifier) {
