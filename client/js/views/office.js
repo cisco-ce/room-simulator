@@ -30,12 +30,13 @@ export default class SmallOffice {
   constructor() {
   }
 
-  hideUnused() {
+  hideInitially() {
     this.setElementVisible('#phone_1_', false);
     this.setElementVisible('#lightfx-switch-canvas', false);
     this.setElementVisible('#switch-HVAC_2_', false);
     this.setElementVisible('#laptop_1_', false);
     this.setOnScreenHelpVisible(false);
+    this.setConnected(false);
   }
 
   setOnScreenHelpVisible(visible) {
@@ -69,7 +70,7 @@ export default class SmallOffice {
     this.setupOutsideWorld(this.root);
     paintRoom(this.root);
     this.setupDrone(this.root);
-    this.hideUnused();
+    this.hideInitially();
     this.addHints();
   }
 
@@ -193,6 +194,12 @@ export default class SmallOffice {
     // TODO
     // const hint = Snap.parse(`<title>${text}</title>`);
     // this.element.select(element).append(hint);
+  }
+
+  setConnected(connected) {
+    this.setElementVisible('#touch10_1_', connected);
+    this.setElementVisible('.monitor', connected);
+    this.setElementVisible('#endpoint_1_', connected);
   }
 
   setOsdImage(sourceIdentifier) {

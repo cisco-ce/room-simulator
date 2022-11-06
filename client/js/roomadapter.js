@@ -247,6 +247,10 @@ export default class RoomAdapter {
     });
   }
 
+  setConnected(connected) {
+    this.view.setConnected(connected);
+  }
+
   setWidgetStatus(widgetId, value) {
     this.throttler.setValue(widgetId, value);
   }
