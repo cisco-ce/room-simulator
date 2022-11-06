@@ -69,7 +69,7 @@ export default class RoomAdapter {
       this.setWidgetStatus('power_tv', tv ? 'on' : 'off');
       const bluray = this.sourceList.isOn('bluray');
       this.setWidgetStatus('power_bluray', bluray ? 'on' : 'off');
-      const appleTv = this.sourceList.isOn('appleTv');
+      const appleTv = this.sourceList.isOn('appletv');
       this.setWidgetStatus('power_appletv', appleTv ? 'on' : 'off');
     });
 
