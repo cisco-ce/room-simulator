@@ -52,11 +52,13 @@ const gui = {
     localStorage.setItem('device', JSON.stringify(this.device));
     try {
       await this.codec.connect(this.device);
+      this.showConnect = false;
       this.connected = true;
       this.hasUiExtensions = await this.codec.hasUiExtensions();
       this.connectors = await this.codec.getConnectorList();
       this.hasExternalSources = await this.codec.hasExternalSources();
       this.setCodec(this.codec);
+      this.adapter.setConnected(true);
     }
     catch(e) {
       alert('Not able to connect. Did you accept the device\'s certificate?');
