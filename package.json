@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "webpack --mode=development",
-    "watch": "webpack --watch --mode=development"
+    "start": "webpack serve"
   },
   "author": "",
   "license": "ISC",
