@@ -203,7 +203,7 @@ export default class SmallOffice {
   }
 
   setOsdImage(sourceIdentifier) {
-    let url;
+    let url, url2;
 
     switch (sourceIdentifier) {
       case 'appletv':
@@ -216,11 +216,13 @@ export default class SmallOffice {
         url = './images/tv.jpg';
         break;
       default:
-        url = './images/wallpaper.png';
+        url = './images/left.png';
+        url2 = './images/right.png';
+        break;
     }
 
     this.osd1.setImage(url);
-    this.osd2.setImage(url);
+    this.osd2.setImage(url2 || url);
   }
 
   setupHvac() {
