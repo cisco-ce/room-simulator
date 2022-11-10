@@ -105,7 +105,6 @@ export default class SmallOffice {
       .click(this.idefixClicked.bind(this))
       .addClass('clickable')
       .attr('id', 'idefix');
-    this.idefix.setImage('./images/wallpaper.png');
 
     setTimeout(() => {
       this.osd1.set(true);
@@ -197,9 +196,10 @@ export default class SmallOffice {
   }
 
   setConnected(connected) {
-    this.setElementVisible('#touch10_1_', connected);
-    this.setElementVisible('.monitor', connected);
-    this.setElementVisible('#endpoint_1_', connected);
+    this.setOsdImage(connected ? 'home' : false);
+    if (connected) {
+      this.idefix.setImage('./images/wallpaper.png');
+    }
   }
 
   setOsdImage(sourceIdentifier) {
@@ -215,7 +215,7 @@ export default class SmallOffice {
       case 'tv':
         url = './images/tv.jpg';
         break;
-      default:
+      case 'home':
         url = './images/left.png';
         url2 = './images/right.png';
         break;
