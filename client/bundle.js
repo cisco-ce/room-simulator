@@ -1932,7 +1932,6 @@ class SmallOffice {
       .click(this.idefixClicked.bind(this))
       .addClass('clickable')
       .attr('id', 'idefix');
-    this.idefix.setImage('./images/wallpaper.png');
 
     setTimeout(() => {
       this.osd1.set(true);
@@ -2024,13 +2023,14 @@ class SmallOffice {
   }
 
   setConnected(connected) {
-    this.setElementVisible('#touch10_1_', connected);
-    this.setElementVisible('.monitor', connected);
-    this.setElementVisible('#endpoint_1_', connected);
+    this.setOsdImage(connected ? 'home' : false);
+    if (connected) {
+      this.idefix.setImage('./images/wallpaper.png');
+    }
   }
 
   setOsdImage(sourceIdentifier) {
-    let url;
+    let url, url2;
 
     switch (sourceIdentifier) {
       case 'appletv':
@@ -2042,12 +2042,14 @@ class SmallOffice {
       case 'tv':
         url = './images/tv.jpg';
         break;
-      default:
-        url = './images/wallpaper.png';
+      case 'home':
+        url = './images/left.png';
+        url2 = './images/right.png';
+        break;
     }
 
     this.osd1.setImage(url);
-    this.osd2.setImage(url);
+    this.osd2.setImage(url2 || url);
   }
 
   setupHvac() {
