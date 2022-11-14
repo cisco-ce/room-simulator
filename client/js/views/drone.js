@@ -12,8 +12,8 @@ export default class Drone {
   init() {
     // for performance, we dont load bitmaps before we have to
     this.ready = true;
-    const imgDrone = '/images/drone.png';
-    const imgLoad = '/images/coke.png';
+    const imgDrone = './images/drone.png';
+    const imgLoad = './images/coke.png';
 
     this.payload = this.droneAndLoad.image(imgLoad, 35, 45, 25, 45);
     this.drone = this.droneAndLoad.image(imgDrone, 0, 0, 100, 50);
