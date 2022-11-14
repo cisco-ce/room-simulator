@@ -78,6 +78,7 @@ h1 {
   background: white;
   border-radius: 1em;
   padding: 2em;
+  max-width: 600px;
 }
 
 form > div {
@@ -129,6 +130,10 @@ form .row {
   gap: 2em;
   align-items: flex-start;
   justify-content: space-between;
+}
+
+form .row:first-child {
+  border: 0;
 }
 
 form .row label {
@@ -194,4 +199,9 @@ select {
 
 #connectorId {
   width: 3em;
+}
+
+.dialog img {
+  width: 100%;
+  margin: 1em;
 }

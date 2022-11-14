@@ -30,6 +30,12 @@
     @click="if($event.target.classList.contains('fade')) showConnectDialog(false)"
   >
     <div class="dialog" x-show="!connected">
+      <h2>Room simulator for RoomOS</h2>
+      <div>
+        <i>Control a lights, shades etc in a virtual room from the touch panel on a physical Cisco collaboration device.</i>
+      </div>
+      <img src="./images/intro.png" class="intro" />
+      <hr/>
       <form>
         <div>Connect to video device</div>
         <div>
@@ -47,13 +53,25 @@
         <div>
           <button @click.prevent="connect()" :disabled="!connectValid()">Connect</button>
          </div>
+         <i>Trouble connecting? Make sure you can log in to the device on
+            <a
+              x-show="device.host"
+              :href="'https://' + device.host"
+              target="_blank"
+              x-text="'https://' + device.host"
+            ></a>
+            <span x-show="!device.host">a video device</span>
+            (accept the self-signed certificate).</i>
       </form>
     </div>
     <div class="dialog" x-show="connected">
       <form>
-        <div>Connected to video device</div>
-        <div>Host:
-          <a :href="'https://' +device.host" target="_blank" x-text=" device.host"></a>
+        <div class="row">
+          <div class="symbol">📹</div>
+          <label><b>Connected to video device</b><br/>
+            The simulator is connected and listening to events from
+            <a :href="'https://' +device.host" target="_blank" x-text=" device.host"></a>
+          </label>
         </div>
         <div class="row">
           <div class="symbol">🎨</div>
@@ -69,8 +87,8 @@
           <div class="symbol">🖥</div>
           <label><b>Virtual sources</b><br/>Set the media players as external sources so you can select them from the share tray.</label>
           <div>
-            <button x-show="!hasExternalSources" @click.prevent="addSources()">Install</button>
-            <button x-show="hasExternalSources" @click.prevent="removeSources()">Remove</button>
+            <button x-show="!hasExternalSources" @click.prevent="addSources()" style="width: 100%">Install</button>
+            <button x-show="hasExternalSources" @click.prevent="removeSources()" style="width: 100%">Remove</button>
             <br/>
             <select x-model="externalSourceConnector" x-show="!hasExternalSources">
               <template x-for="connector in connectors" title="Input connector">
@@ -85,7 +103,15 @@
         <div class="row">
           <div class="symbol">🔎</div>
           <label><b>View APIs</b>
-            <br/>Show events and commands in a terminal-like window.</label>
+            <div>
+              <br/>Show events and commands in a terminal-like window.
+              <img src="./images/diagram.png" />
+              <div>
+                The web page connects to the device using the <a href="https://roomos.cisco.com/docs/JSXAPI/Intro.md" target="_blank">JSXAPI</a>.
+              </div>
+            </div>
+
+          </label>
           <button
             @click.prevent="showTerminal = !showTerminal"
             x-text="showTerminal ? 'Hide' : 'Show'"
