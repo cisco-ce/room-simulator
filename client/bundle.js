@@ -41,8 +41,11 @@ class Codec {
   }
 
   connect(device) {
-    const prot = location.protocol === 'https:' ? 'wss://' : 'ws://';
-    const { host, username, password } = device;
+    const prot = 'wss://'; // location.protocol === 'https:' ? 'wss://' : 'ws://';
+    const { username, password } = device;
+
+    // remove ip and trailing slash if copied from browser
+    const host = device.host.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
     const connect = new Promise((resolve, reject) => {
       window.jsxapi.connect(prot + host, { username, password })
@@ -86,8 +89,12 @@ class Codec {
     this.listener = listener;
   }
 
-  installUiExtension(PanelId, xml) {
+  installUiExtension(PanelId, xml, inControlPanel = false) {
     if (!this.xapi) return;
+    if (inControlPanel) {
+      xml = xml.replace(/<Location>.*?<\/Location>/g, '<Location>ControlPanel</Location>');
+    }
+
     this.reportCommand(`xCommand UserInterface Extensions Panel Save PanelId: "${PanelId}" <XML config here>`)
     return this.xapi.Command.UserInterface.Extensions.Panel.Save({ PanelId }, xml);
   }
@@ -125,8 +132,25 @@ class Codec {
   }
 
   async getConnectorList(skipCamera = true) {
-    const list = await this.xapi.Config.Video.Input.Connector.get();
-    return skipCamera ? list.filter(i => i.InputSourceType !== 'camera') : list;
+    try {
+      const list = await this.xapi.Config.Video.Input.Connector.get();
+      return skipCamera ? list.filter(i => i.InputSourceType !== 'camera') : list;
+    }
+    catch(e) {
+      console.warn('not able to retrieve connector list');
+      return [];
+    }
+  }
+
+  async isMtr() {
+    if (!this.xapi) return false;
+    try {
+      const mtrVersion = await this.xapi.Status.SystemUnit.Extensions.Microsoft.Version.OEMAgent.get();
+      return !!mtrVersion;
+    }
+    catch {
+      return false;
+    }
   }
 
   async hasExternalSources() {
@@ -282,10 +306,12 @@ const gui = {
     const lights = await fetchText('./assets/lights_blinds.xml');
     const climate = await fetchText('./assets/climate.xml');
     const media = await fetchText('./assets/media.xml');
+    const isMtr = await this.codec.isMtr();
+
     try {
-      await this.codec.installUiExtension('uisim_lights', lights);
-      await this.codec.installUiExtension('uisim_climate', climate);
-      await this.codec.installUiExtension('uisim_media', media);
+      await this.codec.installUiExtension('uisim_lights', lights, isMtr);
+      await this.codec.installUiExtension('uisim_climate', climate, isMtr);
+      await this.codec.installUiExtension('uisim_media', media, isMtr);
       this.hasUiExtensions = true;
       alert('UI Extensions are now available on your touch screen or touch panel');
     }
