@@ -28,7 +28,10 @@ export default class Codec {
 
   connect(device) {
     const prot = 'wss://'; // location.protocol === 'https:' ? 'wss://' : 'ws://';
-    const { host, username, password } = device;
+    const { username, password } = device;
+
+    // remove ip and trailing slash if copied from browser
+    const host = device.host.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
     const connect = new Promise((resolve, reject) => {
       window.jsxapi.connect(prot + host, { username, password })
