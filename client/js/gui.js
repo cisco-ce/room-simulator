@@ -90,10 +90,12 @@ const gui = {
     const lights = await fetchText('./assets/lights_blinds.xml');
     const climate = await fetchText('./assets/climate.xml');
     const media = await fetchText('./assets/media.xml');
+    const isMtr = await this.codec.isMtr();
+
     try {
-      await this.codec.installUiExtension('uisim_lights', lights);
-      await this.codec.installUiExtension('uisim_climate', climate);
-      await this.codec.installUiExtension('uisim_media', media);
+      await this.codec.installUiExtension('uisim_lights', lights, isMtr);
+      await this.codec.installUiExtension('uisim_climate', climate, isMtr);
+      await this.codec.installUiExtension('uisim_media', media, isMtr);
       this.hasUiExtensions = true;
       alert('UI Extensions are now available on your touch screen or touch panel');
     }

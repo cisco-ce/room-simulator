@@ -75,8 +75,12 @@ export default class Codec {
     this.listener = listener;
   }
 
-  installUiExtension(PanelId, xml) {
+  installUiExtension(PanelId, xml, inControlPanel = false) {
     if (!this.xapi) return;
+    if (inControlPanel) {
+      xml = xml.replace(/<Location>.*?<\/Location>/g, '<Location>ControlPanel</Location>');
+    }
+
     this.reportCommand(`xCommand UserInterface Extensions Panel Save PanelId: "${PanelId}" <XML config here>`)
     return this.xapi.Command.UserInterface.Extensions.Panel.Save({ PanelId }, xml);
   }
