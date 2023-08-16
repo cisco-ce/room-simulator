@@ -27,7 +27,7 @@ export default class Codec {
   }
 
   connect(device) {
-    const prot = location.protocol === 'https:' ? 'wss://' : 'ws://';
+    const prot = 'wss://'; // location.protocol === 'https:' ? 'wss://' : 'ws://';
     const { host, username, password } = device;
 
     const connect = new Promise((resolve, reject) => {
@@ -111,8 +111,14 @@ export default class Codec {
   }
 
   async getConnectorList(skipCamera = true) {
-    const list = await this.xapi.Config.Video.Input.Connector.get();
-    return skipCamera ? list.filter(i => i.InputSourceType !== 'camera') : list;
+    try {
+      const list = await this.xapi.Config.Video.Input.Connector.get();
+      return skipCamera ? list.filter(i => i.InputSourceType !== 'camera') : list;
+    }
+    catch(e) {
+      console.warn('not able to retrieve connector list');
+      return [];
+    }
   }
 
   async hasExternalSources() {
