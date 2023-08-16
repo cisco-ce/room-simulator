@@ -124,6 +124,17 @@ export default class Codec {
     }
   }
 
+  async isMtr() {
+    if (!this.xapi) return false;
+    try {
+      const mtrVersion = await this.xapi.Status.SystemUnit.Extensions.Microsoft.Version.OEMAgent.get();
+      return !!mtrVersion;
+    }
+    catch {
+      return false;
+    }
+  }
+
   async hasExternalSources() {
     if (!this.xapi) return;
     const list = await this.xapi.Command.UserInterface.Presentation.ExternalSource.List();
